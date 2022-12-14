@@ -145,24 +145,30 @@ public class Market {
     }
 
     public String getByNameProduct(ArrayList<Market> markets) throws Exception {
-        System.out.println("Product : ");
-        String name = new Scanner(System.in).nextLine();
-        boolean nameProduct = false;
-        for (Market market : markets) {
-            for (Product product : market.getProducts()) {
-                if (product.getName().toLowerCase().equals(name.toLowerCase())) {
-                    nameProduct = true;
-                    System.out.println("\n====================" +
-                            "\nMarket : " + market.getName() +
-                            "\nProduct : " + product.getName() +
-                            "\nPrice : " + product.getPrice() +
-                            "\nDiscount : " + product.getDiscount() +
-                            "\n====================");
+
+        try {
+            System.out.println("Product : ");
+            String name = new Scanner(System.in).nextLine();
+            boolean nameProduct = false;
+            for (Market market : markets) {
+                for (Product product : market.getProducts()) {
+                    if (product.getName().toLowerCase().equals(name.toLowerCase())) {
+                        nameProduct = true;
+                        System.out.println("\n====================" +
+                                "\nMarket : " + market.getName() +
+                                "\nProduct : " + product.getName() +
+                                "\nPrice : " + product.getPrice() +
+                                "\nDiscount : " + product.getDiscount() +
+                                "\n====================");
+                    }
                 }
             }
-        }
-        if (!nameProduct) {
-            return "Product not founded!";
+            if (!nameProduct) {
+                return "Product not founded!";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return "Product founded";
     }
@@ -173,27 +179,31 @@ public class Market {
 
     public String createMarket(ArrayList<Market> markets) {
 
-        ArrayList<Product> productArrayList = new ArrayList<>();
-        System.out.println("Market name : ");
-        String marketName = new Scanner(System.in).nextLine();
+        try {
+            ArrayList<Product> productArrayList = new ArrayList<>();
+            System.out.println("Market name : ");
+            String marketName = new Scanner(System.in).nextLine();
 
 
-        while (true) {
-            System.out.println("Add  products? (yes/no)");
-            String yesOrNo = new Scanner(System.in).nextLine();
+            while (true) {
+                System.out.println("Add  products? (yes/no)");
+                String yesOrNo = new Scanner(System.in).nextLine();
 
-            if (yesOrNo.toLowerCase().equals("yes")) {
-                System.out.println("Product name : ");
-                String productName = new Scanner(System.in).nextLine();
-                productArrayList.add(Product.valueOf(productName.toUpperCase()));
+                if (yesOrNo.toLowerCase().equals("yes")) {
+                    System.out.println("Product name : ");
+                    String productName = new Scanner(System.in).nextLine();
+                    productArrayList.add(Product.valueOf(productName.toUpperCase()));
 
-            } else {
-                System.out.println("Enter market account : ");
-                long marketAcc = new Scanner(System.in).nextLong();
-                markets.add(new Market(marketName, new ArrayList<>(productArrayList), marketAcc));
-                return "Market successfully created";
+                } else {
+                    System.out.println("Enter market account : ");
+                    long marketAcc = new Scanner(System.in).nextLong();
+                    markets.add(new Market(marketName, new ArrayList<>(productArrayList), marketAcc));
+                    return "Market successfully created";
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-//        return "Market unsuccessfully created!";
+        return "Market unsuccessfully created!";
     }
 }
