@@ -29,6 +29,8 @@ public class Main {
             System.out.println("5 = Find by name product");
             System.out.println("6 = Create market");
             System.out.println("7 = Get all market");
+            System.out.println("8 = Remove market");
+            System.out.println("9 = change market");
 
             int number = new Scanner(System.in).nextInt();
 
@@ -40,7 +42,8 @@ public class Main {
                 case 5 -> System.out.println(market.getByNameProduct(markets));
                 case 6 -> System.out.println(market.createMarket(markets));
                 case 7 -> System.out.println(market.getAllMarket(markets));
-
+                case 8 -> System.out.println(market.removeMarket(markets));
+                case 9 -> System.out.println(market.changeMarket(markets));
             }
         }
     }
